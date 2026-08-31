@@ -1,0 +1,129 @@
+:root {
+  --primary: #6C4FF5;
+  --primary-dark: #170D34;
+  --primary-light: #A78BFA;
+  --primary-gradient: linear-gradient(135deg, #7C5CFC 0%, #4A2FD8 100%);
+  --dark-gradient: linear-gradient(160deg, #241456 0%, #130A2E 100%);
+
+  --background: #F7F7FC;
+  --surface: #FFFFFF;
+  --surface-muted: #F0EEFB;
+
+  --gold: #FFC53D;
+  --green: #34C77B;
+  --blue: #4A90E2;
+  --orange: #FF8C42;
+  --red: #FF5A5F;
+
+  --text-primary: #171123;
+  --text-secondary: #6B7280;
+  --text-on-dark: #FFFFFF;
+  --text-muted-on-dark: #C9C2E8;
+
+  --border: #EAE8F5;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 6px 20px rgba(108, 79, 245, 0.08);
+  --shadow-glow: 0 8px 28px rgba(108, 79, 245, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #E7E5F3;
+  color: var(--text-primary);
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-size: 16px; /* prevents involuntary zoom-in on focus on iOS Safari */
+}
+
+/* App shell: adapts to any real phone width (320px-480px+), and on
+   wider screens (tablets, desktop) settles into a centered phone-width
+   column so this reads as an app, not a stretched website. */
+.app-shell {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100dvh; /* fixed height, not just minimum, so nav can't be pushed off-screen */
+  overflow: hidden;
+  background: var(--background);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 40px rgba(23, 13, 52, 0.15);
+  padding-top: env(safe-area-inset-top);
+}
+
+@media (max-width: 480px) {
+  .app-shell {
+    box-shadow: none;
+  }
+}
+
+.screen {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  padding-bottom: calc(90px + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 360px) {
+  .screen {
+    padding: 16px;
+    padding-bottom: calc(86px + env(safe-area-inset-bottom));
+  }
+}
+
+.screen-dark {
+  background: var(--dark-gradient);
+  color: var(--text-on-dark);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.screen > * {
+  animation: fadeIn 0.35s ease both;
+}
+
+@media print {
+  .bottom-nav, .no-print {
+    display: none !important;
+  }
+  .app-shell {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .screen {
+    overflow: visible !important;
+  }
+}
